@@ -105,25 +105,20 @@ int main(void) {
     SetConsoleCP(65001);
     
     size_t rows, cols;
-    int got_digits = 0;
-    got_digits += scanf("%d%d", &rows, &cols);
-    
-    if (got_digits != 2) {
+    if (scanf("%d%d", &rows, &cols) != 2) {
         printf("не получили числа верно");
-        return 0;
+        return 1;
     }
 
     int temperatures[rows][cols];
 
     for (size_t i = 0; i < rows; i++) {
         for (size_t j = 0; j < cols; j++) {
-            got_digits += scanf("%d", &temperatures[i][j]);
+            if (scanf("%d", &temperatures[i][j]) != 1) {
+                printf("не получили числа верно");
+                return 1;
+            }
         }
-    }
-
-    if (got_digits != 2 + rows * cols) {
-        printf("не получили числа верно");
-        return 0;
     }
     
     printf("Исходная карта:\n");

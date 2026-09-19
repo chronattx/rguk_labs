@@ -40,7 +40,8 @@ size_t find_longest_increasing(int *begin, int *end, int **sequence_begin) {
     *sequence_begin = begin;
 
     for (int *ptr = begin; ptr + 1 < end; ptr++) {
-        if (*ptr < *(ptr + 1)) curr_len++;
+        if (*ptr < *(ptr + 1)) 
+            curr_len++;
         else curr_len = 1;
         if (curr_len > max_len) {
             max_len = curr_len;
@@ -84,14 +85,15 @@ void print_array(const int *begin, const int *end) {
 int main(void) {
     SetConsoleOutputCP(65001);
     int arr[1000], n, written = 0;
-    scanf("%d", &n);
-
-    for (int i = 0; i < n; i++) written += scanf("%d", arr + i);
-    
-    if (written != n) {
+    if (scanf("%d", &n) != 1) {
         printf("didn't get the digits correctly");
         return 1;
     }
+
+    for (int i = 0; i < n; i++) if (scanf("%d", arr + i) != 1) {
+        printf("didn't get the digits correctly");
+        return 1;
+    }  
 
     int *min_ptr = find_min(arr, arr + n);
     int *max_ptr = find_max(arr, arr + n);
